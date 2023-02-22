@@ -30,8 +30,5 @@ class OrdersService {
     const res = await axios.get(this.realtimeDb + this.collectionName);
     return res.data;
   };
-  // getProductByCategory = async (categoryId) => {
-  //   const collect = collection(apiLink, "catego")
-  // }
 }
 export default OrdersService;

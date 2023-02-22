@@ -47,7 +47,9 @@
             </button>
           </form>
           <div class="cart">
-            <a href="./cart.html"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</a>
+            <a href="./cart.html"
+              ><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</a
+            >
             <span class="total-cart">0</span>
           </div>
         </div>
@@ -81,6 +83,16 @@
               <h3 class="category-heading">
                 <i class="fa-solid fa-bars"></i> DANH MỤC SẢN PHẨM
               </h3>
+              <div class="search-group">
+                <input
+                  type="number"
+                  class="search-price-control"
+                  placeholder="Tìm kiếm sản phẩm theo giá"
+                />
+                <button class="searchWithPice">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </div>
               <div class="category-content">
                 <div class="category-list"></div>
               </div>
@@ -150,7 +162,6 @@
         <p>Design by Nguyen Phi Anh @2023 ^_^</p>
       </div>
     </footer>
-    <script src="../components/listCategory.js" type="module"></script>
     <script src="../components/product.js" type="module"></script>
   </body>
 </html>

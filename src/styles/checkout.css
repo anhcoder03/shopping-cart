@@ -1,0 +1,94 @@
+.checkout-main {
+  margin: 50px 0;
+  /* padding: 20px; */
+  display: flex;
+  gap: 80px;
+}
+.form-khach-hang {
+  width: 60%;
+}
+.heading {
+  padding-bottom: 20px;
+}
+.form-info {
+  padding-top: 20px;
+  border-top: 1px solid #a7a7a7;
+}
+.info-cart {
+  width: 40%;
+}
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px 0;
+}
+.form-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 30px;
+}
+.text-danger {
+  color: #e53c3c;
+}
+.form-name,
+.form-phone {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+#note,
+.form-control {
+  width: 100%;
+  height: 40px;
+  outline: none;
+  border: 1px solid rgb(172, 172, 172);
+  border-radius: 8px;
+  padding-left: 10px;
+}
+#note {
+  height: 100px;
+}
+#note:focus,
+.form-control:focus {
+  box-shadow: none;
+  border: 3px solid rgb(95, 95, 221) !important;
+}
+.btn-submit {
+  outline: none;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 8px;
+  background-color: rgb(28, 176, 62);
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+.btn-submit:hover {
+  background-color: rgb(88, 204, 115);
+}
+
+.cart-item {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #a7a7a7;
+  width: 100%;
+}
+.widget-product-title a {
+  font-size: 20px;
+  text-decoration: none;
+}
+.cart-item-content {
+  width: 100%;
+  font-size: 18px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+#totalPrice {
+  margin-top: 20px;
+  font-size: 24px;
+}

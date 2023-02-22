@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="../styles/checkout.css" />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Thanh toán</title>
+  </head>
+  <body>
+    <header id="header">
+      <div class="header-top">
+        <div class="header-contact">
+          <a class="phone" href="tel: 0357984421"
+            ><i class="fa-solid fa-phone"></i> 0357984421</a
+          >
+          <span><i class="fa-solid fa-envelope"></i> contact@gmail.com</span>
+        </div>
+        <div class="account">
+          <a href="#">Đăng nhập</a> / <a href="#">Đăng ký tài khoản</a>
+        </div>
+      </div>
+      <div class="container">
+        <div class="header-bottom">
+          <div class="logo">
+            <a href="#"
+              ><img
+                src="https://fs-01.web4s.vn/uploads/plugin/setting/3/i-n-may-logo-black-318-163-0.png"
+                alt=""
+            /></a>
+          </div>
+          <form class="search">
+            <input
+              type="text"
+              placeholder="Tìm kiếm sản phẩm..."
+              class="search-control"
+            />
+            <button type="submit" class="search-btn">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+          <div class="cart">
+            <a href="./cart.html"
+              ><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</a
+            >
+            <span class="total-cart">0</span>
+          </div>
+        </div>
+      </div>
+      <nav id="nav">
+        <ul class="menu">
+          <li class="menu-item">
+            <a href="../index.html" class="menu-link">TRANG CHỦ</a>
+          </li>
+          <li class="menu-item">
+            <a href="./product.html" class="menu-link">SẢN PHẨM</a>
+          </li>
+          <li class="menu-item">
+            <a href="#" class="menu-link">THƯƠNG HIỆU</a>
+          </li>
+          <li class="menu-item">
+            <a href="#" class="menu-link">TIN TỨC</a>
+          </li>
+          <li class="menu-item"><a href="#" class="menu-link">HỎI ĐÁP</a></li>
+          <li class="menu-item">
+            <a href="./contact.html" class="menu-link">LIÊN HỆ</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <div id="main">
+      <div class="container">
+        <div class="checkout-main">
+          <div class="form-khach-hang">
+            <h3 class="heading">Thông Tin Khách Hàng</h3>
+            <div class="form-info">
+              <input type="hidden" id="idOrder" />
+              <div class="form-group">
+                <div class="form-wrapper">
+                  <div class="form-name">
+                    <label class="form-label" for="name"
+                      >Họ Và Tên <span class="text-danger">*</span></label
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="name"
+                      id="name"
+                      placeholder="Phi Anh"
+                    />
+                  </div>
+                  <div class="form-phone">
+                    <label class="form-label" for="phone"
+                      >Số Điện Thoại <span class="text-danger">*</span></label
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="phone"
+                      id="phone"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email"
+                  >Địa Chỉ Email <span class="text-danger">*</span></label
+                >
+                <input
+                  class="form-control"
+                  type="email"
+                  name="email"
+                  id="email"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="address"
+                  >Địa Chỉ <span class="text-danger">*</span></label
+                >
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="Tên đường, Tòa nhà, Số nhà"
+                  name="address"
+                  id="address"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="note">Ghi Chú Nếu Bạn Cần</label>
+                <textarea
+                  cols="30"
+                  rows="7"
+                  class=""
+                  name="note"
+                  id="note"
+                ></textarea>
+              </div>
+              <button class="btn-submit" id="addOrder">Thanh Toán</button>
+            </div>
+          </div>
+          <div class="info-cart">
+            <h3 class="heading">Thông Tin Đơn Hàng</h3>
+            <div class="listCart"></div>
+            <h4
+              class="fw-normal text-center pt-3 text-danger"
+              id="totalPrice"
+            ></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer id="footer">
+      <div class="container">
+        <div class="footer-list">
+          <div class="footer-item">
+            <h3 class="footer-heading">VỀ CHÚNG TÔI</h3>
+            <div class="footer-content">
+              <p class="footer-text">
+                Watchtime là shop đồng hồ đang thịnh hành trên toàn quốc
+              </p>
+              <p class="footer-text">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>32 Võ Văn Dũng - Đống Đa - Hà Nội</span>
+              </p>
+              <p class="footer-text">
+                <i class="fa-solid fa-phone"></i> <span>0357984421</span>
+              </p>
+              <p class="footer-text">
+                <i class="fa-solid fa-envelope"></i> anhcoder03@gmail.com
+              </p>
+            </div>
+          </div>
+          <div class="footer-item">
+            <h3 class="footer-heading">TIN TỨC MỚI</h3>
+            <div class="footer-content">
+              <a href="#" class="footer-link">Về chúng tôi</a>
+              <a href="#" class="footer-link">Tuyển dụng</a>
+              <a href="#" class="footer-link">Hợp tắc bán hàng</a>
+              <a href="#" class="footer-link">Điều kiện & điều khoản</a>
+              <a href="#" class="footer-link">Chính sách bảo mật</a>
+            </div>
+          </div>
+          <div class="footer-item">
+            <h3 class="footer-heading">CÂU HỎI THƯỜNG GẶP</h3>
+            <div class="footer-content">
+              <a href="#" class="footer-link">Hỏi đáp</a>
+              <a href="#" class="footer-link">Liên hệ</a>
+              <a href="#" class="footer-link">Biểu phí giao hàng</a>
+              <a href="#" class="footer-link">Thẻ quà tặng</a>
+              <a href="#" class="footer-link">Danh mục sản phẩm</a>
+            </div>
+          </div>
+          <div class="footer-item">
+            <h3 class="footer-heading">CHÍNH SÁCH</h3>
+            <div class="footer-content">
+              <a href="#" class="footer-link">Chính sách bảo mật</a>
+              <a href="#" class="footer-link">Chính sách vận chuyển</a>
+              <a href="#" class="footer-link">Chính sách bảo hành</a>
+              <a href="#" class="footer-link">Chính sách đổi hàng</a>
+              <a href="#" class="footer-link">Quy định thanh toán</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Design by Nguyen Phi Anh @2023 ^_^</p>
+      </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <script type="module" src="../components/orders/insertOrder.js"></script>
+  </body>
+</html>

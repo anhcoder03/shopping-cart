@@ -1,0 +1,108 @@
+.checkout-main {
+  gap: 80px;
+  margin: 50px 0;
+  display: flex;
+}
+
+.form-khach-hang {
+  width: 60%;
+}
+
+.heading {
+  padding-bottom: 20px;
+}
+
+.form-info {
+  border-top: 1px solid #a7a7a7;
+  padding-top: 20px;
+}
+
+.info-cart {
+  width: 40%;
+}
+
+.form-group {
+  flex-direction: column;
+  gap: 10px 0;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.form-wrapper {
+  width: 100%;
+  gap: 30px;
+  display: flex;
+}
+
+.text-danger {
+  color: #e53c3c;
+}
+
+.form-name, .form-phone {
+  width: 100%;
+  flex-direction: column;
+  gap: 10px;
+  display: flex;
+}
+
+#note, .form-control {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #acacac;
+  border-radius: 8px;
+  outline: none;
+  padding-left: 10px;
+}
+
+#note {
+  height: 100px;
+}
+
+#note:focus, .form-control:focus {
+  box-shadow: none;
+  border: 3px solid #5f5fdd !important;
+}
+
+.btn-submit {
+  color: #fff;
+  cursor: pointer;
+  background-color: #1cb03e;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  padding: 15px 20px;
+  font-weight: bold;
+}
+
+.btn-submit:hover {
+  background-color: #58cc73;
+}
+
+.cart-item {
+  width: 100%;
+  border-bottom: 1px solid #a7a7a7;
+  gap: 20px;
+  padding-bottom: 10px;
+  display: flex;
+}
+
+.widget-product-title a {
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.cart-item-content {
+  width: 100%;
+  align-items: center;
+  gap: 50px;
+  margin-top: 20px;
+  font-size: 18px;
+  display: flex;
+}
+
+#totalPrice {
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+/*# sourceMappingURL=checkout.54a1ca37.css.map */

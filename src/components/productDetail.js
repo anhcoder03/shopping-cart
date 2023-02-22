@@ -4,19 +4,6 @@ import UrlHelper from "../helpers/UrlHelper";
 import ProductService from "../services/ProductService";
 
 document.addEventListener("DOMContentLoaded", () => {
-  function sumTotal() {
-    const totalCart = document.querySelector(".total-cart");
-    const cartList = JSON.parse(localStorage.getItem("addToCart"));
-    let total = 0;
-    if (cartList > 0) {
-      for (let i = 0; i < cartList.length; i++) {
-        let quantity = parseInt(cartList[i].quantity);
-        total += quantity;
-      }
-      totalCart.textContent = total;
-    }
-  }
-  sumTotal();
   const productService = new ProductService(apiLink, "Token");
 
   const updateBtn = document.querySelector(".btn_update");
@@ -115,6 +102,20 @@ document.addEventListener("DOMContentLoaded", () => {
         inputSelected.value = Number(inputSelected.value) + 1;
       });
 
+      const totalCart = document.querySelector(".total-cart");
+      const cartList = JSON.parse(localStorage.getItem("addToCart"));
+      let total = 0;
+      const getAmountTotal = () => {
+        if (cartList && cartList.length > 0) {
+          for (let i = 0; i < cartList.length; i++) {
+            let quantity = parseInt(cartList[i].quantity);
+            console.log(cartList[i].quantity);
+            total += quantity;
+          }
+        }
+        totalCart.textContent = total;
+      };
+      getAmountTotal();
       const addToCart = document.querySelector(".add--cart");
       const idProduct = addToCart.dataset.id;
       addToCart.addEventListener("click", (e) => {
@@ -138,7 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
           carts.push(htmlCv);
         }
         localStorage?.setItem("addToCart", JSON.stringify(carts));
-        sumTotal();
       });
     });
   } catch (err) {

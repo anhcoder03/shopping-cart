@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const totalCart = document.querySelector(".total-cart");
   const cartList = JSON.parse(localStorage.getItem("addToCart"));
   let total = 0;
-  if (cartList > 0) {
+  if (cartList && cartList.length > 0) {
     for (let i = 0; i < cartList.length; i++) {
       let quantity = parseInt(cartList[i].quantity);
       total += quantity;

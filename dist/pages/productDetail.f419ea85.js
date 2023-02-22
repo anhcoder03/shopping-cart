@@ -565,19 +565,6 @@ var _urlHelperDefault = parcelHelpers.interopDefault(_urlHelper);
 var _productService = require("../services/ProductService");
 var _productServiceDefault = parcelHelpers.interopDefault(_productService);
 document.addEventListener("DOMContentLoaded", ()=>{
-    function sumTotal() {
-        const totalCart = document.querySelector(".total-cart");
-        const cartList = JSON.parse(localStorage.getItem("addToCart"));
-        let total = 0;
-        if (cartList > 0) {
-            for(let i = 0; i < cartList.length; i++){
-                let quantity = parseInt(cartList[i].quantity);
-                total += quantity;
-            }
-            totalCart.textContent = total;
-        }
-    }
-    sumTotal();
     const productService = new (0, _productServiceDefault.default)((0, _config.apiLink), "Token");
     const updateBtn = document.querySelector(".btn_update");
     const url = location.href;
@@ -669,6 +656,18 @@ document.addEventListener("DOMContentLoaded", ()=>{
             increaseBtn.addEventListener("click", ()=>{
                 inputSelected.value = Number(inputSelected.value) + 1;
             });
+            const totalCart = document.querySelector(".total-cart");
+            const cartList = JSON.parse(localStorage.getItem("addToCart"));
+            let total = 0;
+            const getAmountTotal = ()=>{
+                if (cartList && cartList.length > 0) for(let i = 0; i < cartList.length; i++){
+                    let quantity = parseInt(cartList[i].quantity);
+                    console.log(cartList[i].quantity);
+                    total += quantity;
+                }
+                totalCart.textContent = total;
+            };
+            getAmountTotal();
             const addToCart = document.querySelector(".add--cart");
             const idProduct = addToCart.dataset.id;
             addToCart.addEventListener("click", (e)=>{
@@ -687,7 +686,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 if (idx !== -1) carts[idx].quantity = +quantity.value + +carts[idx].quantity;
                 else carts.push(htmlCv);
                 localStorage?.setItem("addToCart", JSON.stringify(carts));
-                sumTotal();
             });
         });
     } catch (err) {

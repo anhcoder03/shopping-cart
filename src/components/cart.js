@@ -1,19 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const cartProduct = document.getElementById("cart-product");
 
-  const totalCart = document.querySelector(".total-cart");
-  const cartList = JSON.parse(localStorage.getItem("addToCart"));
-  function sumTotal() {
-    let total = 0;
-    if (cartList.length >= 0) {
-      for (let i = 0; i < cartList.length; i++) {
-        let quantity = parseInt(cartList[i].quantity);
-        total += quantity;
-      }
-      totalCart.textContent = total;
-    }
-  }
-  sumTotal();
   function renderCartProduct() {
     const dbCartJson = localStorage.getItem("addToCart");
     const dbCart = JSON.parse(dbCartJson);
@@ -56,16 +43,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const convertToNum = Number(textContentPrice.replaceAll(",", ""));
         arr.push(convertToNum);
       });
-      arr.reduce((acc, curr) => {
-        const totalPayment = document.querySelector(".total-payment span");
-        total = acc + curr;
-        console.log(total);
-        const totalConvertStr = new Intl.NumberFormat("vi-VN", {
-          style: "currency",
-          currency: "VND",
-        }).format(total);
-        totalPayment.textContent = totalConvertStr;
-      });
+      const formatPrice = (number) => {
+        return new Intl.NumberFormat().format(number);
+      };
+      const totalPayment = document.querySelector(".total-payment span");
+      const getTotalPrice = () => {
+        const total = arr.reduce((total, price) => total + price);
+        totalPayment.textContent = formatPrice(total);
+        return total;
+      };
+      getTotalPrice();
     } else {
       const mainCart = document.querySelector("#main-cart");
       const mainCartContent = document.querySelector(".main-cart-content");
@@ -80,17 +67,28 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
       `;
       mainCart.insertAdjacentHTML("beforeend", template);
-      sumTotal();
     }
   }
 
   if (cartProduct) {
     renderCartProduct();
   }
+  const totalCart = document.querySelector(".total-cart");
+  const cartList = JSON.parse(localStorage.getItem("addToCart"));
+  function sumTotal() {
+    let total = 0;
+    if (cartList.length >= 0) {
+      for (let i = 0; i < cartList.length; i++) {
+        let quantity = parseInt(cartList[i].quantity);
+        total += quantity;
+      }
+      totalCart.textContent = total;
+    }
+  }
+  sumTotal();
   const deleteBtn = document.querySelectorAll(".__manipulation--delete");
   [...deleteBtn].forEach((item) =>
     item.addEventListener("click", function (e) {
-      console.log("ok");
       const cartItem = e.target.parentNode.parentNode;
       cartItem.parentNode.removeChild(cartItem);
       const cartId = cartItem.dataset.id;
@@ -98,8 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const dbCart = JSON.parse(dbCartJson);
       const newCarts = dbCart.filter((item) => item.id !== cartId);
       localStorage.setItem("addToCart", JSON.stringify(newCarts));
-      // sumTotal();
-      // renderCartProduct();
+      location.href = "cart.htmlx";
     })
   );
 });

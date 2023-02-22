@@ -1,41 +1,74 @@
 import "regenerator-runtime/runtime";
 import { apiLink } from "../../firebase/config";
 import Orders from "../../models/Order";
+import OrderDetail from "../../models/OrderDetail";
+import OrderDetailService from "../../services/OrderDetailService";
 import OrdersService from "../../services/OrdersService";
 
 document.addEventListener("DOMContentLoaded", () => {
   const ordersService = new OrdersService(apiLink, "Token");
-//   try {
-//    ordersService.getCategoryAll().then((data) => {
-//       for (const key in data) {
-//         const el = data[key];
-//         const categoryList = document.querySelector("#categories");
-//         const template = `<option value="${key}" class="category-item">${el.name}</option>`;
-//         categoryList.insertAdjacentHTML("beforeend", template);
-//       }
-//     });
-//   } catch (err) {
-//     console.log(err);
-//   }
+  const orderDetailService = new OrderDetailService(apiLink, "Token");
+  const cartItems = JSON.parse(localStorage.getItem("addToCart"));
+  const listCart = document.querySelector(".listCart");
+  let list = "";
+  let totalPrice = 0;
+  cartItems.forEach((item) => {
+    totalPrice = totalPrice + item.price * item.quantity;
+  });
+  console.log(totalPrice);
+  function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  }
 
-  const postBtn = document.querySelector(".btn-post");
+  for (let el of cartItems) {
+    list += `
+    <div class="cart-item">
+      <a class="d-block flex-shrink-0 mr-2" href="#"
+        ><img
+          class="rounded-1"
+          src="${el.image}"
+          width="50"
+          alt=""
+      /></a>
+      <div class="ps-1">
+        <h6 class="widget-product-title">
+          <a href="#">${el.name}</a>
+        </h6>
+        <div
+          class="cart-item-content"
+        >
+          <span class="text-accent border-end pr-2 mr-2"
+            >${formatNumber(el.price * el.quantity)}</span
+          ><span class="text-end">SL: ${el.quantity}</span>
+        </div>
+      </div>
+    </div>
+  `;
+  }
+  const priceAll = document.querySelector("#totalPrice");
+  priceAll.textContent = `Tổng Tiền : ${formatNumber(totalPrice)}`;
+  listCart.insertAdjacentHTML("beforeend", list);
+  const postBtn = document.querySelector("#addOrder");
   postBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    const categoryId = document.querySelector("#categories").value;
-    const productName = document.querySelector("#product_name").value;
-    const productId = document.querySelector("#product_id");
-    const image = document.querySelector("#image").value;
-    const price = document.querySelector("#price").value;
-    const description = document.querySelector(".description").value;
-    const quantity = document.querySelector("#quantity").value;
+    const idOrder = document.querySelector("#idOrder");
+    const name = document.querySelector("#name").value;
+    const phone = document.querySelector("#phone").value;
+    const email = document.querySelector("#email").value;
+    const address = document.querySelector("#address").value;
+    const date = new Date().toISOString();
 
-    if (
-      productName == "" ||
-      image == "" ||
-      price == "" ||
-      description == "" ||
-      quantity == ""
-    ) {
+    const orders = new Orders(
+      null,
+      date,
+      address,
+      name,
+      phone,
+      email,
+      "Pendding"
+    );
+
+    if (name == "" || phone == "" || email == "" || address == "") {
       const template = `
           <div class="sweet-alert error">
             <i class="fas fa-exclamation-circle sweet-icon error"></i>
@@ -49,34 +82,41 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1000);
       }
       return;
-    }
-    const product = new Orders(
-      categoryId,
-      null,
-      productName,
-      description,
-      price,
-      image,
-      quantity
-    );
-    try {
-      productService.insertProduct(product).then((data) => {
-        productId.value = data;
-        const template = `
+    } else {
+      try {
+        ordersService.insertOrder(orders).then((data) => {
+          idOrder.value = data;
+          for (const product of cartItems) {
+            const price = formatNumber(product.price * product.quantity);
+            const orderDetail = new OrderDetail(
+              null,
+              data, // data idOrder
+              product.id,
+              product.quantity,
+              price
+            );
+            orderDetailService.insertOrderDetail(orderDetail).then((data) => {
+              console.log(data);
+            });
+          }
+          const template = `
           <div class="sweet-alert">
             <i class="fa fa-check sweet-icon"></i>
-            <p class="sweet-text">Thêm mới thành công</p>
+            <p class="sweet-text">Đặt hàng thành công</p>
           </div>`;
-        document.body.insertAdjacentHTML("beforeend", template);
-        const sweetItem = document.querySelector(".sweet-alert");
-        if (sweetItem) {
-          setTimeout(function () {
-            sweetItem.parentElement.removeChild(sweetItem);
-          }, 1000);
-        }
-      });
-    } catch (err) {
-      console.log(err);
+          document.body.insertAdjacentHTML("beforeend", template);
+          const sweetItem = document.querySelector(".sweet-alert");
+          if (sweetItem) {
+            setTimeout(function () {
+              sweetItem.parentElement.removeChild(sweetItem);
+              location.href = "../index.html";
+              localStorage.clear();
+            }, 1000);
+          }
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
   });
 });

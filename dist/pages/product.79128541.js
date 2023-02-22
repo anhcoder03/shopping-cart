@@ -568,16 +568,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
         categoryService.getCategoryAll().then((data)=>{
             for(const key in data){
                 const el = data[key];
-                const categoryList = document.querySelector(".category-list");
                 const categoryListAdmin = document.querySelector(".category-list_admin");
-                if (categoryList) {
-                    const template = `
-          <div class="category-item" data-cateId=${key} >
-            <a href="productCategory.html?id=${key}" class="category-link">${el.name}</a>
-          </div>`;
-                    categoryList.insertAdjacentHTML("beforeend", template);
-                } else {
-                    const template = `
+                const template = `
           <tr>
           <td>${key}</td>
           <td>${el.name}</td>
@@ -589,8 +581,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                       class="fas fa-trash"></i></a>
           </td>
       </tr>`;
-                    categoryListAdmin.insertAdjacentHTML("beforeend", template);
-                }
+                categoryListAdmin.insertAdjacentHTML("beforeend", template);
             }
         });
     } catch (err) {

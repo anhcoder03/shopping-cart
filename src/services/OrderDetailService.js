@@ -26,7 +26,7 @@ class OrderDetailService {
     return res.data;
   };
   getOrderDetailById = async (id) => {
-    const res = await axios.get(`${this.realtimeDb}order_detail/${id}.json`);
+    const res = await axios.get(`${this.realtimeDb}OrderDetail/${id}.json`);
     return res.data;
   };
   getOrderDetailAll = async (id) => {

@@ -560,6 +560,10 @@ function hmrAccept(bundle, id) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _runtime = require("regenerator-runtime/runtime");
 var _config = require("../firebase/config");
+var _urlHelper = require("../helpers/UrlHelper");
+var _urlHelperDefault = parcelHelpers.interopDefault(_urlHelper);
+var _categoryService = require("../services/CategoryService");
+var _categoryServiceDefault = parcelHelpers.interopDefault(_categoryService);
 var _productService = require("../services/ProductService");
 var _productServiceDefault = parcelHelpers.interopDefault(_productService);
 document.addEventListener("DOMContentLoaded", ()=>{
@@ -581,35 +585,100 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const totalCart = document.querySelector(".total-cart");
     const cartList = JSON.parse(localStorage.getItem("addToCart"));
     let total = 0;
-    if (cartList > 0) for(let i = 0; i < cartList.length; i++){
+    if (cartList && cartList.length > 0) for(let i = 0; i < cartList.length; i++){
         let quantity = parseInt(cartList[i].quantity);
         total += quantity;
     }
     totalCart.textContent = total;
+    const url = location.href;
+    const urlHelper = new (0, _urlHelperDefault.default)();
+    const cateId = urlHelper.readParams(url, "cateid");
+    const priceFromUrl = urlHelper.readParams(url, "price");
+    const btnSearchPrice = document.querySelector(".searchWithPice");
+    btnSearchPrice.addEventListener("click", ()=>{
+        const searchControl = document.querySelector(".search-price-control").value;
+        location.href = `product.html?price=${searchControl}`;
+    });
+    const categoryService = new (0, _categoryServiceDefault.default)((0, _config.apiLink), "Token");
+    try {
+        categoryService.getCategoryAll().then((data)=>{
+            for(const key in data){
+                const el = data[key];
+                const categoryList = document.querySelector(".category-list");
+                const template = `
+          <div class="category-item">
+            <a href="product.html?cateid=${key}" class="category-link ${key === cateId ? "category__active" : ""}">${el.name}</a>
+          </div>`;
+                categoryList.insertAdjacentHTML("beforeend", template);
+            }
+        });
+    } catch (err) {
+        console.log(err);
+    }
     const productService = new (0, _productServiceDefault.default)((0, _config.apiLink), "Token");
     try {
         productService.getProductAll().then((data)=>{
             for(const key in data){
                 const el = data[key];
                 const productList = document.querySelector(".product-list");
-                const template = `
-         <div class="product-item">
-            <div class="product-image">
-               <a href="productDetail.html?id=${key}"><img src="${el.image}" alt=""></a>  
-            </div>
-            <div class="product-content">
-               <a href="productDetail.html?id=${key}" data-id="${key}" class="product-name">${el.productName}</a> 
-               <div class="price-product">
-                  <span class="price">${new Intl.NumberFormat("vi-VN", {
-                    style: "currency",
-                    currency: "VND"
-                }).format(el.price)}</span>
-                  <p class="quantity-sold">đã bán ${el.quantity}</p>
-               </div>
-               <a href="productDetail.html?id=${key}" class="mua-ngay">Mua Ngay</a>
-            </div>
-         </div>`;
-                productList.insertAdjacentHTML("beforeend", template);
+                if (el.categoryId === cateId) {
+                    const template = `
+           <div class="product-item">
+              <div class="product-image">
+                 <a href="productDetail.html?id=${key}"><img src="${el.image}" alt=""></a>  
+              </div>
+              <div class="product-content">
+                 <a href="productDetail.html?id=${key}" data-id="${key}" class="product-name">${el.productName}</a> 
+                 <div class="price-product">
+                    <span class="price">${new Intl.NumberFormat("vi-VN", {
+                        style: "currency",
+                        currency: "VND"
+                    }).format(el.price)}</span>
+                    <p class="quantity-sold">đã bán ${el.quantity}</p>
+                 </div>
+                 <a href="productDetail.html?id=${key}" class="mua-ngay">Mua Ngay</a>
+              </div>
+           </div>`;
+                    productList.insertAdjacentHTML("beforeend", template);
+                } else if (Number(el.price) <= Number(priceFromUrl)) {
+                    const template = `
+           <div class="product-item">
+              <div class="product-image">
+                 <a href="productDetail.html?id=${key}"><img src="${el.image}" alt=""></a>  
+              </div>
+              <div class="product-content">
+                 <a href="productDetail.html?id=${key}" data-id="${key}" class="product-name">${el.productName}</a> 
+                 <div class="price-product">
+                    <span class="price">${new Intl.NumberFormat("vi-VN", {
+                        style: "currency",
+                        currency: "VND"
+                    }).format(el.price)}</span>
+                    <p class="quantity-sold">đã bán ${el.quantity}</p>
+                 </div>
+                 <a href="productDetail.html?id=${key}" class="mua-ngay">Mua Ngay</a>
+              </div>
+           </div>`;
+                    productList.insertAdjacentHTML("beforeend", template);
+                } else if (!cateId && !priceFromUrl) {
+                    const template = `
+           <div class="product-item">
+              <div class="product-image">
+                 <a href="productDetail.html?id=${key}"><img src="${el.image}" alt=""></a>  
+              </div>
+              <div class="product-content">
+                 <a href="productDetail.html?id=${key}" data-id="${key}" class="product-name">${el.productName}</a> 
+                 <div class="price-product">
+                    <span class="price">${new Intl.NumberFormat("vi-VN", {
+                        style: "currency",
+                        currency: "VND"
+                    }).format(el.price)}</span>
+                    <p class="quantity-sold">đã bán ${el.quantity}</p>
+                 </div>
+                 <a href="productDetail.html?id=${key}" class="mua-ngay">Mua Ngay</a>
+              </div>
+           </div>`;
+                    productList.insertAdjacentHTML("beforeend", template);
+                }
             }
         });
     } catch (err) {
@@ -617,7 +686,60 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
 });
 
-},{"regenerator-runtime/runtime":"dXNgZ","../firebase/config":"7nU9T","../services/ProductService":"5BxuJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5BxuJ":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"dXNgZ","../firebase/config":"7nU9T","../helpers/UrlHelper":"bSskj","../services/CategoryService":"ddUVJ","../services/ProductService":"5BxuJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bSskj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+class UrlHelper {
+    readParamsFromUrl = (url)=>{
+        const vars = [];
+        const parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+            vars[key] = value;
+        });
+        return vars;
+    };
+    readParams = (url, paramName)=>{
+        const vars = this.readParamsFromUrl(url);
+        return vars[paramName];
+    };
+}
+exports.default = UrlHelper;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ddUVJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+class CategoryService {
+    constructor(realtimeDb, accessToken){
+        this.collectionName = "categories.json";
+        this.realtimeDb = realtimeDb;
+        this.accessToken = accessToken;
+    }
+    insertCategory = async (entity)=>{
+        const res = await (0, _axiosDefault.default).post(this.realtimeDb + this.collectionName, entity);
+        const insertId = await res.data.name;
+        return insertId;
+    };
+    updateCategory = async (id, entity)=>{
+        const res = await (0, _axiosDefault.default).put(`${this.realtimeDb}categories/${id}.json`, entity);
+        return res.data;
+    };
+    deleteCategory = async (id)=>{
+        const res = await (0, _axiosDefault.default).delete(`${this.realtimeDb}categories/${id}.json`);
+        return res.data;
+    };
+    getCategoryById = async (id, entity)=>{
+        const res = await (0, _axiosDefault.default).get(`${this.realtimeDb}categories/${id}.json`);
+        return res.data;
+    };
+    getCategoryAll = async (id)=>{
+        const res = await (0, _axiosDefault.default).get(this.realtimeDb + this.collectionName);
+        return res.data;
+    };
+}
+exports.default = CategoryService;
+
+},{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5BxuJ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _axios = require("axios");

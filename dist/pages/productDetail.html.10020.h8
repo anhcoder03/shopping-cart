@@ -1,26 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewpor/titt" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="../styles/style.css" />
+  <head><script src="/admin/order/orderDetail.eebc14e4.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewpor/titt" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="/index.4ee4707b.css">
+    <link rel="stylesheet" href="/pages/productDetail.e546a49d.css">
     <title>Sản phẩm</title>
   </head>
   <body>
     <header id="header">
       <div class="header-top">
         <div class="header-contact">
-          <a class="phone" href="tel: 0357984421"
-            ><i class="fa-solid fa-phone"></i> 0357984421</a
-          >
+          <a class="phone" href="tel: 0357984421"><i class="fa-solid fa-phone"></i> 0357984421</a>
           <span><i class="fa-solid fa-envelope"></i> contact@gmail.com</span>
         </div>
         <div class="account">
@@ -30,24 +23,16 @@
       <div class="container">
         <div class="header-bottom">
           <div class="logo">
-            <a href="#"
-              ><img
-                src="https://fs-01.web4s.vn/uploads/plugin/setting/3/i-n-may-logo-black-318-163-0.png"
-                alt=""
-            /></a>
+            <a href="#"><img src="https://fs-01.web4s.vn/uploads/plugin/setting/3/i-n-may-logo-black-318-163-0.png" alt=""></a>
           </div>
           <form class="search">
-            <input
-              type="text"
-              placeholder="Tìm kiếm sản phẩm..."
-              class="search-control"
-            />
+            <input type="text" placeholder="Tìm kiếm sản phẩm..." class="search-control">
             <button type="submit" class="search-btn">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
           <div class="cart">
-            <a href="#"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</a>
+            <a href="/pages/cart.html"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</a>
             <span class="total-cart">0</span>
           </div>
         </div>
@@ -55,10 +40,10 @@
       <nav id="nav">
         <ul class="menu">
           <li class="menu-item">
-            <a href="../index.html" class="menu-link">TRANG CHỦ</a>
+            <a href="/index.html" class="menu-link">TRANG CHỦ</a>
           </li>
           <li class="menu-item">
-            <a href="./product.html" class="menu-link">SẢN PHẨM</a>
+            <a href="/pages/product.html" class="menu-link">SẢN PHẨM</a>
           </li>
           <li class="menu-item">
             <a href="#" class="menu-link">THƯƠNG HIỆU</a>
@@ -68,29 +53,14 @@
           </li>
           <li class="menu-item"><a href="#" class="menu-link">HỎI ĐÁP</a></li>
           <li class="menu-item">
-            <a href="./contact.html" class="menu-link">LIÊN HỆ</a>
+            <a href="/pages/contact.html" class="menu-link">LIÊN HỆ</a>
           </li>
         </ul>
       </nav>
     </header>
     <div id="main">
       <div class="container">
-        <div class="product-wrapper">
-          <div class="category-wrapper">
-            <div class="category-main">
-              <h3 class="category-heading">
-                <i class="fa-solid fa-bars"></i> DANH MỤC SẢN PHẨM
-              </h3>
-              <div class="category-content">
-                <div class="category-list"></div>
-              </div>
-            </div>
-          </div>
-          <div class="product-main">
-            <div class="product-heading">TẤT CẢ SẢN PHẨM</div>
-            <div class="product-list"></div>
-          </div>
-        </div>
+        <div class="main-product-detail"></div>
       </div>
     </div>
     <footer id="footer">
@@ -150,7 +120,6 @@
         <p>Design by Nguyen Phi Anh @2023 ^_^</p>
       </div>
     </footer>
-    <script src="../components/listCategory.js" type="module"></script>
-    <script src="../components/productCategory.js" type="module"></script>
+    <script src="/pages/productDetail.f419ea85.js" defer=""></script>
   </body>
 </html>

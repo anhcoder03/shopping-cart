@@ -1,34 +1,29 @@
 import "regenerator-runtime/runtime";
 import { apiLink } from "../../firebase/config";
-import OrderDetailService from "../../services/OrderDetailService";
+import OrdersService from "../../services/OrdersService";
 function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
 document.addEventListener("DOMContentLoaded", function () {
-  const orderDetailService = new OrderDetailService(apiLink, "Token");
+  const orderService = new OrdersService(apiLink, "Token");
   try {
     const listOrder = document.querySelector("#listOrder");
-    orderDetailService.getOrderDetailAll().then((data) => {
+    orderService.getOrderAll().then((data) => {
       console.log(data);
       let list = "";
       for (const id in data) {
         const el = data[id];
         list += `
-                        <tr class="text-center">
-                            <td scope="row">${id}</td>
-                            <td>
-                                <a class="btn btn-primary" href="listInfoUser.html?id=${
-                                  el.orderId
-                                }">Khách Hàng</a>
-                            </td>   
-                            <td>
-                                <a class="btn btn-success" href="listIdProduct.html?id=${
-                                  el.productId
-                                }">Sản Phẩm</a>
-                            </td>
-                            <td>${el.quantity}</td>
-                            <td>${formatNumber(el.unit_price)}</td>
-                        </tr>  
+        <tr>
+        <td>${el.customer_name}</td>
+        <td>${el.email}</td>
+        <td>${el.customer_address}</td>
+        <td>${el.phone}</td>
+        <td>${el.created_date}</td>
+        <td>
+          <a style="color: blue" href="orderDetail.html?id=${id}"><i class="fa fa-pencil" aria-hidden="true"></i> Xem chi tiết </a>
+        </td>
+      </tr> 
         `;
       }
       listOrder.insertAdjacentHTML("beforeend", list); // list ra html

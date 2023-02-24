@@ -6,6 +6,16 @@ import OrderDetailService from "../../services/OrderDetailService";
 import OrdersService from "../../services/OrdersService";
 
 document.addEventListener("DOMContentLoaded", () => {
+  const totalCart = document.querySelector(".total-cart");
+  const cartList = JSON.parse(localStorage.getItem("addToCart"));
+  let total = 0;
+  if (cartList && cartList.length > 0) {
+    for (let i = 0; i < cartList.length; i++) {
+      let quantity = parseInt(cartList[i].quantity);
+      total += quantity;
+    }
+  }
+  totalCart.textContent = total;
   const ordersService = new OrdersService(apiLink, "Token");
   const orderDetailService = new OrderDetailService(apiLink, "Token");
   const cartItems = JSON.parse(localStorage.getItem("addToCart"));
@@ -56,11 +66,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const phone = document.querySelector("#phone").value;
     const email = document.querySelector("#email").value;
     const address = document.querySelector("#address").value;
-    const date = new Date().toISOString();
+    const date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let currentDate = `${day}/${month}/${year}`;
 
     const orders = new Orders(
       null,
-      date,
+      currentDate,
       address,
       name,
       phone,
@@ -90,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const price = formatNumber(product.price * product.quantity);
             const orderDetail = new OrderDetail(
               null,
-              data, // data idOrder
+              data,
               product.id,
               product.quantity,
               price

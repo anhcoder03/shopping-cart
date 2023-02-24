@@ -569,6 +569,14 @@ var _orderDetailServiceDefault = parcelHelpers.interopDefault(_orderDetailServic
 var _ordersService = require("../../services/OrdersService");
 var _ordersServiceDefault = parcelHelpers.interopDefault(_ordersService);
 document.addEventListener("DOMContentLoaded", ()=>{
+    const totalCart = document.querySelector(".total-cart");
+    const cartList = JSON.parse(localStorage.getItem("addToCart"));
+    let total = 0;
+    if (cartList && cartList.length > 0) for(let i = 0; i < cartList.length; i++){
+        let quantity = parseInt(cartList[i].quantity);
+        total += quantity;
+    }
+    totalCart.textContent = total;
     const ordersService = new (0, _ordersServiceDefault.default)((0, _config.apiLink), "Token");
     const orderDetailService = new (0, _orderDetailServiceDefault.default)((0, _config.apiLink), "Token");
     const cartItems = JSON.parse(localStorage.getItem("addToCart"));

@@ -560,32 +560,31 @@ function hmrAccept(bundle, id) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _runtime = require("regenerator-runtime/runtime");
 var _config = require("../../firebase/config");
-var _orderDetailService = require("../../services/OrderDetailService");
-var _orderDetailServiceDefault = parcelHelpers.interopDefault(_orderDetailService);
+var _ordersService = require("../../services/OrdersService");
+var _ordersServiceDefault = parcelHelpers.interopDefault(_ordersService);
 function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
 document.addEventListener("DOMContentLoaded", function() {
-    const orderDetailService = new (0, _orderDetailServiceDefault.default)((0, _config.apiLink), "Token");
+    const orderService = new (0, _ordersServiceDefault.default)((0, _config.apiLink), "Token");
     try {
         const listOrder = document.querySelector("#listOrder");
-        orderDetailService.getOrderDetailAll().then((data)=>{
+        orderService.getOrderAll().then((data)=>{
             console.log(data);
             let list = "";
             for(const id in data){
                 const el = data[id];
                 list += `
-                        <tr class="text-center">
-                            <td scope="row">${id}</td>
-                            <td>
-                                <a class="btn btn-primary" href="listInfoUser.html?id=${el.orderId}">Khách Hàng</a>
-                            </td>   
-                            <td>
-                                <a class="btn btn-success" href="listIdProduct.html?id=${el.productId}">Sản Phẩm</a>
-                            </td>
-                            <td>${el.quantity}</td>
-                            <td>${formatNumber(el.unit_price)}</td>
-                        </tr>  
+        <tr>
+        <td>${el.customer_name}</td>
+        <td>${el.email}</td>
+        <td>${el.customer_address}</td>
+        <td>${el.phone}</td>
+        <td>${el.created_date}</td>
+        <td>
+          <a style="color: blue" href="orderDetail.html?id=${id}"><i class="fa fa-pencil" aria-hidden="true"></i> Xem chi tiết </a>
+        </td>
+      </tr> 
         `;
             }
             listOrder.insertAdjacentHTML("beforeend", list); // list ra html
@@ -595,40 +594,40 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-},{"regenerator-runtime/runtime":"dXNgZ","../../firebase/config":"7nU9T","../../services/OrderDetailService":"aXU24","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aXU24":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"dXNgZ","../../firebase/config":"7nU9T","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../services/OrdersService":"2nTKL"}],"2nTKL":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
-class OrderDetailService {
+class OrdersService {
     constructor(realtimeDb, accessToken){
-        this.collectionName = "order_detail.json";
+        this.collectionName = "orders.json";
         this.realtimeDb = realtimeDb;
         this.accessToken = accessToken;
     }
-    insertOrderDetail = async (entity)=>{
+    insertOrder = async (entity)=>{
         const res = await (0, _axiosDefault.default).post(this.realtimeDb + this.collectionName, entity);
         const insertId = await res.data.name;
         return insertId;
     };
-    updateOrderDetail = async (id, entity)=>{
-        const res = await (0, _axiosDefault.default).put(`${this.realtimeDb}order_detail/${id}.json`, entity);
+    updateOrder = async (id, entity)=>{
+        const res = await (0, _axiosDefault.default).put(`${this.realtimeDb}orders/${id}.json`, entity);
         return res.data;
     };
-    deleteOrderDetail = async (id)=>{
-        const res = await (0, _axiosDefault.default).delete(`${this.realtimeDb}order_detail/${id}.json`);
+    deleteOrder = async (id)=>{
+        const res = await (0, _axiosDefault.default).delete(`${this.realtimeDb}orders/${id}.json`);
         return res.data;
     };
-    getOrderDetailById = async (id)=>{
-        const res = await (0, _axiosDefault.default).get(`${this.realtimeDb}OrderDetail/${id}.json`);
+    getOrderById = async (id)=>{
+        const res = await (0, _axiosDefault.default).get(`${this.realtimeDb}orders/${id}.json`);
         return res.data;
     };
-    getOrderDetailAll = async (id)=>{
+    getOrderAll = async (id)=>{
         const res = await (0, _axiosDefault.default).get(this.realtimeDb + this.collectionName);
         return res.data;
     };
 }
-exports.default = OrderDetailService;
+exports.default = OrdersService;
 
 },{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["kckTW","4gqIp"], "4gqIp", "parcelRequire8cd9")
 

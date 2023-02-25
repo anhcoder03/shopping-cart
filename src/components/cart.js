@@ -1,13 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
   const cartProduct = document.getElementById("cart-product");
-
+  const formatPrice = (number) => {
+    return new Intl.NumberFormat().format(number);
+  };
   function renderCartProduct() {
     const dbCartJson = localStorage.getItem("addToCart");
     const dbCart = JSON.parse(dbCartJson);
     if (dbCart.length > 0) {
       const html = dbCart.map((e) => {
         const priceNewNumber = Number(e.price);
-        const price = (priceNewNumber * e.quantity).toLocaleString("en-US");
+        const price = priceNewNumber * e.quantity;
         return `
          <div class="cart-product--item" data-id="${e.id}">
            <div class="product__img-title">
@@ -21,12 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
              </div>
            </div>
            <div class="product__unit_price">
-               <p class="unit-price-new">đ${e.price}</p>
+               <p class="unit-price-new">${formatPrice(e.price)}đ</p>
            </div>
            <div class="product__amount">
-             <input type="text" name="" class="input__product--selected" value="${e.quantity}">
+             <input type="text" name="" class="input__product--selected" disabled readonly value="${
+               e.quantity
+             }">
            </div>
-           <div class="product__amount_money">đ<span>${price}</span></div>
+           <div class="product__amount_money">đ<span>${formatPrice(
+             price
+           )}</span></div>
            <div class="product__manipulation">
              <p class="__manipulation--delete">Xoá</p>
            </div>
@@ -40,12 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
       let arr = [];
       [...priceList].forEach((item) => {
         const textContentPrice = item.textContent;
-        const convertToNum = Number(textContentPrice.replaceAll(",", ""));
+        const convertToNum = Number(textContentPrice.replaceAll(".", ""));
         arr.push(convertToNum);
       });
-      const formatPrice = (number) => {
-        return new Intl.NumberFormat().format(number);
-      };
       const totalPayment = document.querySelector(".total-payment span");
       const getTotalPrice = () => {
         const total = arr.reduce((total, price) => total + price);
@@ -96,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const dbCart = JSON.parse(dbCartJson);
       const newCarts = dbCart.filter((item) => item.id !== cartId);
       localStorage.setItem("addToCart", JSON.stringify(newCarts));
-      location.href = "cart.htmlx";
+      location.href = "cart.html";
     })
   );
 });

@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (sweetItem) {
             setTimeout(function () {
               sweetItem.parentElement.removeChild(sweetItem);
-              location.href = "../index.html";
+              location.href = "./thank.html";
               localStorage.clear();
             }, 1000);
           }

@@ -617,6 +617,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 const sweetItem = document.querySelector(".sweet-alert");
                 if (sweetItem) setTimeout(function() {
                     sweetItem.parentElement.removeChild(sweetItem);
+                    location.href = "listProduct.html";
                 }, 1000);
             });
         } catch (err) {

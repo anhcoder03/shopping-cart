@@ -594,7 +594,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-},{"regenerator-runtime/runtime":"dXNgZ","../../firebase/config":"7nU9T","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../services/OrdersService":"2nTKL"}],"2nTKL":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"dXNgZ","../../firebase/config":"7nU9T","../../services/OrdersService":"2nTKL","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2nTKL":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _axios = require("axios");

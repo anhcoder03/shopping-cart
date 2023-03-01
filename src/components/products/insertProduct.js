@@ -75,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (sweetItem) {
           setTimeout(function () {
             sweetItem.parentElement.removeChild(sweetItem);
+            location.href = "listProduct.html";
           }, 1000);
         }
       });

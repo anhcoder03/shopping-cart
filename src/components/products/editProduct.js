@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const productName = document.querySelector("#product_name");
   const productId = document.querySelector("#product_id");
   const image = document.querySelector("#image");
-  const price = document.querySelector("#price")
+  const price = document.querySelector("#price");
   const description = document.querySelector(".description");
   const quantity = document.querySelector("#quantity");
   const categoryList = document.querySelector("#categories");
@@ -86,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (sweetItem) {
           setTimeout(function () {
             sweetItem.parentElement.removeChild(sweetItem);
+            location.href = "listProduct.html";
           }, 1000);
         }
       });

@@ -215,4 +215,35 @@
   display: block;
 }
 
+.wrapperThank {
+  width: 100%;
+  padding: 50px 0;
+}
+
+.img-thank {
+  height: 500px;
+  width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.wrapperBackHome {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.backHome {
+  width: 300px;
+  color: #fff;
+  text-align: center;
+  background-color: #ed4d2d;
+  border-radius: 8px;
+  margin-top: 50px;
+  padding: 20px 0;
+  font-size: 16px;
+  text-decoration: none;
+  display: block;
+}
+
 /*# sourceMappingURL=cart.4ea326c1.css.map */

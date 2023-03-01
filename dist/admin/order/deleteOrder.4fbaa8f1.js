@@ -581,7 +581,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     handleDeleteOrder();
 });
 
-},{"regenerator-runtime/runtime":"dXNgZ","../../firebase/config":"7nU9T","../../services/OrderDetailService":"aXU24","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../services/OrdersService":"2nTKL","../../helpers/UrlHelper":"bSskj"}],"aXU24":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"dXNgZ","../../firebase/config":"7nU9T","../../services/OrderDetailService":"aXU24","../../services/OrdersService":"2nTKL","../../helpers/UrlHelper":"bSskj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aXU24":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _axios = require("axios");

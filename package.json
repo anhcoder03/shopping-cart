@@ -11,7 +11,7 @@
     "parcel-plugin-static-files-copy": "^2.6.0"
   },
   "scripts": {
-    "dev": "parcel src/*.html src/pages/*.html src/admin/categories/*.html src/admin/products/*.html src/admin/order/*.html",
+    "dev": "parcel src/*.html src/pages/*.html src/admin/categories/*.html src/admin/products/*.html src/admin/order/*.html src/admin/thongke/*.html",
     "devw": "parcel watch ./*html"
   },
   "author": "",

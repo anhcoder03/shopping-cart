@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (sweetItem) {
           setTimeout(function () {
             sweetItem.parentElement.removeChild(sweetItem);
+            location.href = "listCategory.html";
           }, 1000);
         }
       });

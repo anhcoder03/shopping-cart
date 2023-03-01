@@ -603,25 +603,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-},{"../../firebase/config":"7nU9T","../../helpers/UrlHelper":"bSskj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../services/OrderDetailService":"aXU24","regenerator-runtime/runtime":"dXNgZ","../../services/ProductService":"5BxuJ"}],"bSskj":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-class UrlHelper {
-    readParamsFromUrl = (url)=>{
-        const vars = [];
-        const parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
-            vars[key] = value;
-        });
-        return vars;
-    };
-    readParams = (url, paramName)=>{
-        const vars = this.readParamsFromUrl(url);
-        return vars[paramName];
-    };
-}
-exports.default = UrlHelper;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aXU24":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"dXNgZ","../../firebase/config":"7nU9T","../../services/OrderDetailService":"aXU24","../../helpers/UrlHelper":"bSskj","../../services/ProductService":"5BxuJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aXU24":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _axios = require("axios");
@@ -656,7 +638,25 @@ class OrderDetailService {
 }
 exports.default = OrderDetailService;
 
-},{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5BxuJ":[function(require,module,exports) {
+},{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bSskj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+class UrlHelper {
+    readParamsFromUrl = (url)=>{
+        const vars = [];
+        const parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+            vars[key] = value;
+        });
+        return vars;
+    };
+    readParams = (url, paramName)=>{
+        const vars = this.readParamsFromUrl(url);
+        return vars[paramName];
+    };
+}
+exports.default = UrlHelper;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5BxuJ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _axios = require("axios");
